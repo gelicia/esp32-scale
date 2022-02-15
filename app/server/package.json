@@ -1,0 +1,16 @@
+{
+  "name": "Smart Scale Webapp - Server",
+  "version": "1.0.0",
+  "description": "A webapp for managing data recieved from a smart scale",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Kristina Durivage @gelicia",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.2",
+    "postgres": "^1.0.2"
+  }
+}
