@@ -12,7 +12,7 @@ const getVisceralFat = require("./metricsUtils/getVisceralFat");
 const getBMI = require("./metricsUtils/getBMI");
 const getProteinPercentage = require("./metricsUtils/getProteinPercentage");
 
-const sql = postgres('');
+const sql = postgres(process.env.POSTGRESURL);
 
 const router = express.Router();
 const app = express();

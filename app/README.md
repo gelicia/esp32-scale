@@ -12,9 +12,12 @@ This will have the following functionality
 1. Start an EC2 instance using amazon linux
 1. Install postgres with `sudo amazon-linux-extras install postgresql12`
 1. Install node with the following https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
+1. Postgres schema creation script will be provided when finalized.
 
-Users table - height is in CM. Weight is in whatever, it has a separate units column although it should probably be kgs
+Users table - height is in CM. Weight is in whatever, it has a separate units column. 
 
-Users table needs some basic metrics like dob and height to start calculating metrics. 
+Users table needs some basic metrics like dob and height to start calculating metrics.
 
-The metrics calculations used are based on a biological sex binary that is non inclusive of the spectrum of gender or of people's lived experiences. I have no idea what the source of the calculations are prior to the [xiaomi_mi_scale github repository](https://github.com/lolouk44/xiaomi_mi_scale) and I lack the knowledge to alter these calculations to anything other than what is provided. Users should select male or female based on an estimation on how their hormonal makeup will affect the muscle, bone and fat mass in their bodies. Please submit an issue if you have any ideas on how to make usage of this application more inclusive with the limitations of the source material and measurements provided by the scale.
+Measurements table stores weight into KGs to be standardized. 
+
+The metrics calculations used are based on a biological sex binary that is non inclusive of the spectrum of gender and of people's lived experiences. I have no idea what the source of the calculations are prior to the [xiaomi_mi_scale github repository](https://github.com/lolouk44/xiaomi_mi_scale) and I lack the knowledge to alter these calculations to be anything other than what is provided. Users should select male or female based on an estimation on how their hormonal makeup will affect the muscle, bone and fat composition of their bodies. Please submit an issue if you have any ideas on how to make usage of this application more inclusive with the limitations of the source material and measurements provided by the scale.
