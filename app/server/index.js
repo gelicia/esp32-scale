@@ -39,7 +39,10 @@ router.post('/measurement', isCallAuthenticated, async(request,response) => {
 
     const users = await sql`select * from users`
     const user = users[0]; // select our one user for now
-    const age =  new Date().getFullYear() - new Date(user.dateOfBirth).getFullYear();
+
+    
+    const birthday = +new Date(user.dateOfBirth);
+    const age = ~~((Date.now() - birthday) / (31557600000));
 
     const lbm = getLBMCoefficient(user.height, calcWeight, impedance, age);
     const fatPercentage = getFatPercentage(user.sex, age, calcWeight, user.height, lbm);
