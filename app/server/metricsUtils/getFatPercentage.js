@@ -1,7 +1,6 @@
-import {getLBMCoefficient} from './getLBMCoefficient';
-import {checkOverflow} from './checkOverflowcheckOverflow';
+const checkOverflow = require("./checkOverflow");
 
-function getFatPercentage(sex, age, weight, height, impedance) {
+module.exports = function (sex, age, weight, height, lbm) {
     let lbmModifier = 0.8;
     if (sex==="f") {
         if (age <= 49) {
@@ -23,7 +22,7 @@ function getFatPercentage(sex, age, weight, height, impedance) {
         coefficient = 0.98
     }
 
-    const lbm = getLBMCoefficient( height, weight, impedance, age) - lbmModifier;
+    //const lbm = getLBMCoefficient( height, weight, impedance, age) - lbmModifier;
     const fatPercentage = (1.0 - (((lbm) * coefficient) / weight)) * 100;
     // changing everything above 63% to 75% seems weird...
     return checkOverflow(fatPercentage > 63 ? 75 : fatPercentage, 5, 75);

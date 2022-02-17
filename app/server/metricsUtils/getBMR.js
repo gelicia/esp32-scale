@@ -1,6 +1,6 @@
-import checkOverflow from 'checkOverflow';
+const checkOverflow = require("./checkOverflow");
 
-function getBMR(sex, weight, height, age) {
+module.exports = function (sex, weight, height, age) {
     let bmr;
     if (sex === 'f') {
         bmr = 864.6 + weight * 10.2036

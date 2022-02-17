@@ -1,4 +1,4 @@
-export function checkOverflow(value, min, max) {
+module.exports = function (value, min, max) {
     if (value < min) {
         return min;
     } else if (value > max) {
