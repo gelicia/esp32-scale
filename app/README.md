@@ -5,14 +5,17 @@ This is a placeholder for app code. WIP!
 This will have the following functionality
 
 1. An endpoint that will receive weight and impedance data from a device.
-1. Allow setup of user profiles, including height, age, and last measured lean body mass (LBM) coefficient.
-1. Logic that will view incoming data, guess which user from a profile it belongs to based on last measured LBM, assign it to that user's profile, and generate body metrics based on a combination of that weight and profile data
-1. A tool that will allow someone to re-assign a measurement to another user in case the guess was wrong.
+1. Allow setup of user profiles, including height, age and sex (see note below). 
+1. Logic that will view incoming data, guess which user from a profile it belongs to based on last measured LBM, assign it to that user's profile, and generate body metrics based on a combination of that weight and profile data. It will update the user profile to have a last measured weight and LBM for use in future guesses.
+1. A tool that will allow someone to re-assign a measurement to another user in case the guess was wrong. Reassigning a measurement will update both users' profiles.
+1. Pretty charts showing body composition changes over time with no "ideal/goal" metrics.
+
+---
 
 1. Start an EC2 instance using amazon linux
 1. Install postgres with `sudo amazon-linux-extras install postgresql12`
 1. Install node with the following https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
-1. Postgres schema creation script will be provided when finalized.
+1. Postgres schema creation script will be provided when finalized. See `server/scripts/schema.sql` for the WIP
 
 Users table - height is in CM. Weight is in whatever, it has a separate units column. 
 
