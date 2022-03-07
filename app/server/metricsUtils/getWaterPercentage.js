@@ -6,7 +6,10 @@ module.exports = function (fatPercentage) {
     if (waterPercentage <= 50) {
         coefficient = 1.02
     }
-    let total =  waterPercentage * coefficient;
-    total = total >= 65 ? 75 * coefficient : total;
-    return checkOverflow(total, 35, 75);
+
+    if (waterPercentage * coefficient >=65) {
+        waterPercentage = 75;
+    }
+
+    return checkOverflow(waterPercentage * coefficient, 35, 75);
 }
