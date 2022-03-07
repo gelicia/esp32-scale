@@ -23,7 +23,7 @@ module.exports = function (sex, age, weight, height, lbm) {
     }
 
     //const lbm = getLBMCoefficient( height, weight, impedance, age) - lbmModifier;
-    const fatPercentage = (1.0 - (((lbm) * coefficient) / weight)) * 100;
+    const fatPercentage = (1.0 - (((lbm - lbmModifier) * coefficient) / weight)) * 100;
     // changing everything above 63% to 75% seems weird...
     return checkOverflow(fatPercentage > 63 ? 75 : fatPercentage, 5, 75);
 }
