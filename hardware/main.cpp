@@ -92,7 +92,7 @@ class MyAdvertisedDeviceCallbacks : public BLEAdvertisedDeviceCallbacks
 
           // Specify content-type header
           http.addHeader("Content-Type", "application/json");
-          http.addHeader("Authorization", "Bearer f1361cc5-ff8d-455c-bef8-68d59e7d42d8");
+          http.addHeader("Authorization", "Bearer <insert made up key here>");
           char jsonBuffer [200];
           sprintf(jsonBuffer, "{\"weight\":%f,\"impedance\":%lu,\"unit\":\"%s\"}", measurement, impedance, unit);
           Serial.println(jsonBuffer);
