@@ -39,24 +39,28 @@ router.post('/measurement', isCallAuthenticated, async(request,response) => {
 
     const users = await sql`select * from users`
     const user = users[0]; // select our one user for now
-
     
-    const birthday = +new Date(user.dateOfBirth);
-    const age = ~~((Date.now() - birthday) / (31557600000));
-
-    const lbm = getLBMCoefficient(user.height, calcWeight, impedance, age);
-    const fatPercentage = getFatPercentage(user.sex, age, calcWeight, user.height, lbm);
-    const boneMass = getBoneMass(lbm, user.sex);
-    const muscleMass = getMuscleMass(calcWeight, user.sex, fatPercentage, boneMass);
-    const waterPercentage = getWaterPercentage(fatPercentage);
-
-    const [new_measurement] = await sql`INSERT INTO measurements(weight, impedance, lbm, bmr, "fatPercentage", "waterPercentage", "boneMass", "muscleMass", "visceralFat", bmi, "proteinPercentage", "userId")
-        VALUES (${calcWeight}, ${impedance}, ${lbm}, ${getBMR(user.sex, calcWeight, user.height, age)}, ${fatPercentage}, ${waterPercentage}, ${boneMass}, ${muscleMass}, ${getVisceralFat(user.sex, calcWeight, user.height, age)}, ${getBMI(calcWeight, user.height)}, ${getProteinPercentage(calcWeight, muscleMass, waterPercentage, fatPercentage, boneMass)}, ${user.userid})
+    if (user === undefined) {
+        response.status(500);
+        response.send({error: true, message:"User profile required to add measurements"});
+    } else {
+        const birthday = +new Date(user.dateOfBirth);
+        const age = ~~((Date.now() - birthday) / (31557600000));
     
-        returning *
-        `;
-    response.status(200);
-    response.send(new_measurement);
+        const lbm = getLBMCoefficient(user.height, calcWeight, impedance, age);
+        const fatPercentage = getFatPercentage(user.sex, age, calcWeight, user.height, lbm);
+        const boneMass = getBoneMass(lbm, user.sex);
+        const muscleMass = getMuscleMass(calcWeight, user.sex, fatPercentage, boneMass);
+        const waterPercentage = getWaterPercentage(fatPercentage);
+    
+        const [new_measurement] = await sql`INSERT INTO measurements(weight, impedance, lbm, bmr, "fatPercentage", "waterPercentage", "boneMass", "muscleMass", "visceralFat", bmi, "proteinPercentage", "userId")
+            VALUES (${calcWeight}, ${impedance}, ${lbm}, ${getBMR(user.sex, calcWeight, user.height, age)}, ${fatPercentage}, ${waterPercentage}, ${boneMass}, ${muscleMass}, ${getVisceralFat(user.sex, calcWeight, user.height, age)}, ${getBMI(calcWeight, user.height)}, ${getProteinPercentage(calcWeight, muscleMass, waterPercentage, fatPercentage, boneMass)}, ${user.userid})
+        
+            returning *
+            `;
+        response.status(200);
+        response.send(new_measurement);
+    }
 });
 
 app.listen(3000,() => {
