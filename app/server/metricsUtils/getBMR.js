@@ -8,7 +8,7 @@ module.exports = function (sex, weight, height, age) {
         bmr -= age * 6.204
         bmr = bmr > 2996 ? 5000 : bmr;
     } else if (sex === 'm') {
-        mr = 877.8 + weight * 14.916
+        bmr = 877.8 + weight * 14.916
         bmr -= height * 0.726
         bmr -= age * 8.976
         bmr = bmr > 2322 ? 5000 : bmr;
