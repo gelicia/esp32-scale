@@ -12,10 +12,26 @@ This will have the following functionality
 
 ---
 
+Server method
+
 1. Start an EC2 instance using amazon linux
 1. Install postgres with `sudo amazon-linux-extras install postgresql12`
 1. Install node with the following https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-up-node-on-ec2-instance.html
-1. Postgres schema creation script will be provided when finalized. See `server/scripts/schema.sql` for the WIP
+1. Postgres schema creation script is at `server/scripts/schema.sql`. You will need to create one entry in the users table.
+
+---
+
+Lambda method
+
+1. Use RDS to host a Postgres instance.
+1. Postgres schema creation script is at `server/scripts/schema.sql`. You will need to create one entry in the users table.
+1. In the `app/lambda/measurement` folder, run `npm i` to bring in the database library. Zip this to a file
+1. Create a lambda function that is exposed as an endpoint via the API gateway. 
+1. Overwrite boilerplate lambda code by importing the zipped file.
+1. Create an authorizer lambda for API gateway. The code for it is in `app/lambda/measurementAuthorizer` You will want to choose a key and be sure the hardware code is sending it in as the `authToken`. 
+1. Create a cloudfront distribution that will let you access the endpoint above without https. This is done because trying to access HTTPS endpoints on the ESP32 is difficult.
+
+---
 
 Users table - height is in CM. Weight is in whatever, it has a separate units column. 
 
